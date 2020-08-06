@@ -12,6 +12,7 @@ app.secret_key = "jose"
 # add api
 api = Api(app)
 
+# JWT creates a new endpoint /login/
 app.config["JWT_AUTH_URL_RULE"] = "/login/"
 jwt = JWT(app, authenticate, identity)
 
