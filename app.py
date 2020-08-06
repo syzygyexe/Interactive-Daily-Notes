@@ -12,11 +12,7 @@ app.secret_key = "jose"
 # add api
 api = Api(app)
 
-# JWT creates a new endpoint - /auth. When we call a /auth, we send it a username and a password,
-# and the JWT extension gets that username and password and sends it over to the authenticate function
-# that takes in a username and password. We are then going to find the correct user object,
-# using that username, and we are going to compare its password to the one we received through
-# the /auth endpoint.
+app.config["JWT_AUTH_URL_RULE"] = "/login"
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, "/item/<string:name>")
