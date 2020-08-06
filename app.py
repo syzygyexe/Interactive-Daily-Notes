@@ -12,7 +12,7 @@ app.secret_key = "jose"
 # add api
 api = Api(app)
 
-app.config["JWT_AUTH_URL_RULE"] = "/login"
+app.config["JWT_AUTH_URL_RULE"] = "/login/"
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, "/item/<string:name>")
