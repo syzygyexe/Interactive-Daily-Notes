@@ -1,21 +1,32 @@
 from flask import Flask
 from flask_restful import Api
-from flask_jwt import JWT
+from flask_jwt_extended import JWTManager
 
-from security import authenticate, identity
-from resources.user import UserRegister
+from resources.user import UserRegister, User, UserLogin
 from resources.item import Item, ItemList
+# app >>> store(resources) >>> store(model) >>> table with definitions.
+# If we are not going to track tables, the table for stores won't be created.
+from resources.store import Store, StoreList
 
 app = Flask(__name__)
+# the database doesnt necessarily needs to be sqlite, it can be MySql/Oracle, anything.
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 # Turns off Flask_SQLAlchemy tracker, and sets SQLAlchemy modification tracker on.
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Flask JWT will show you wrong messages in details, if one occurs.
+app.config["PROPAGATE_EXCEPTIONS"] = True
 # encryption
-app.secret_key = "jose"
+app.secret_key = "jose" # app.config["JWT_SECRET_KEY"]
 # add api
 api = Api(app)
 
-# app.config["JWT_AUTH_URL_RULE"] = "/login"
-jwt = JWT(app, authenticate, identity)
+# this method is going to be run before any method
+@app.before_first_request
+def create_tables():
+    # this is going to create all tables inside of the db, unless they exist already
+    db.create_all()
+
+jwt = JWTManager(app) # not creating /auth, we have to create is ourselves inside of the user resources.
 
 # token expiration time
 # # config JWT to expire within half an hour
@@ -26,12 +37,14 @@ jwt = JWT(app, authenticate, identity)
 # config JWT auth key name to be 'email' instead of default 'username'
 # app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
 
-
+api.add_resource(Store, "/store/<string:name>")
 api.add_resource(Item, "/item/<string:name>")
+api.add_resource(StoreList, "/stores/")
 api.add_resource(ItemList, "/items/")
 # When we are going to call "/register" with "POST method", we will execute UserRegister method.
 api.add_resource(UserRegister, "/register/")
-
+api.add_resource(User, "/user/<int:user_id>")
+api.add_resource(UserLogin, "/login/")
 
 if __name__ == "__main__":
     from models.db import db
