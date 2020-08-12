@@ -30,7 +30,7 @@ class StoreModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        # SELECT * FROM items WHERE name=name LIMIT 1, basically returns only 
+        # SELECT * FROM items WHERE name=name LIMIT 1. Basically improved return function 
         return cls.query.filter_by(name=name).first() 
 
     @classmethod
