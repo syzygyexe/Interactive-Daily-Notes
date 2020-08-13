@@ -37,7 +37,7 @@ def add_claims_to_jwt(identity):
 # inside of jwt variable
 @jwt.expired_token_loader
 def expired_token_callback():
-    
+    pass
     
 # token expiration time (if needed)
 # # config JWT to expire within half an hour
