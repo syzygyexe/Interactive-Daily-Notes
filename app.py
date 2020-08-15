@@ -44,6 +44,7 @@ def expired_token_callback():
 # app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 
 
+
 # Authentication Key Name (if needed)
 # config JWT auth key name to be 'email' instead of default 'username'
 # app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
