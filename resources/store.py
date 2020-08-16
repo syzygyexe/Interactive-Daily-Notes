@@ -22,7 +22,6 @@ class StoreModel(db.Model):
         # to retrieve all items from that table. Which means that until we call the JSON method
         # we are not looking into the table. Which means that creating stores is very simple.
         # However, whenever we call the JSON method, we have to go into the table, it gonna be slower.
-        # https://medium.com/@ns2586/sqlalchemys-relationship-and-lazy-parameter-4a553257d9ef
         return {
         "id": self.id,
         "name": self.name,
