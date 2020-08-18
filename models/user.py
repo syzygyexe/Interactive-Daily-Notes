@@ -1,7 +1,7 @@
 import sqlite3
 from models.db import db
 
-# This model has two APIs, which are - find_by_username and find_by_id.
+# This model has two APIs, which are - "find_by_username" and "find_by_id".
 class UserModel(db.Model):
     # tell SQLAlchemy the table name, where these models are going to be stored:
     __tablename__ = "users"
