@@ -1,6 +1,6 @@
 from models.db import db
 
-# db.Model allows us to save to database and retrieve from the database. (Mapping between db and objects)
+# db.Model allows us to save to database and retrieve from the database. (Mapping between db and objects).
 class ItemModel(db.Model):
     __tablename__ = "items"
     
