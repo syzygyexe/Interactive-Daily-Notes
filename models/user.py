@@ -14,7 +14,7 @@ class UserModel(db.Model):
     username = db.Column(db.String(80))
     password = db.Column(db.String(80))
 
-    # Above propertries mast match self.id/self.username/self.passowrd.
+    # Above propertries must match self.id/self.username/self.passowrd.
     # Otherwise, they won't be appended to the database.
 
 
